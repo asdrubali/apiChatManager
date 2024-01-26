@@ -7,9 +7,9 @@ import { createBotTelegramService } from "../services/create/botTelegram.service
 export const telegramController = async (req = request, res) => {
     try {
         
-        const { botId }= req.params;
+        const { id, session }= req.body;
 
-        const result = await createBotTelegramService(botId)
+        const result = await createBotTelegramService(botId = id)
         
         res.status(200).json(result)
  

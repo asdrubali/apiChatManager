@@ -3,7 +3,7 @@ import { telegramController } from "../controllers/botTelegram.conroller.js";
 
 const routerTelegram = Router()
 
-routerTelegram.post('/startTelegramBot/:botId', telegramController)
+routerTelegram.post('/startTelegramBot', telegramController)
 
 
 export default routerTelegram
