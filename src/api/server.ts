@@ -5,6 +5,8 @@ import routerTelegram from './telegram/routes/telegram.router'
 import routerWhatsApp from './whatsapp/routes/whatsApp.router'
 import { mainBotWs } from './whatsapp'
 import { adProvider } from './whatsapp/provider'
+import { createBotWs, flowStaticRentCar } from './whatsapp/templates/statickCarsRent'
+import database from './whatsapp/database'
 
 
 
@@ -29,7 +31,8 @@ export default class Server {
       this.middlewares()
       this.routes()
       this.errors()
-      mainBotWs(adProvider)
+      createBotWs()
+      
     }
   
     static init(port: number) {

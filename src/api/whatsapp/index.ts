@@ -24,3 +24,14 @@ export const mainBotWs = async (provider: any) => {
     // initServer(botInstance)
 }
 
+
+// export const createBotWs = async (database: any, provider: any, flow: any) => {
+
+//     const botInstance = await BotWhatsapp.createBot({
+//         database,
+//         provider,
+//         flow
+//     })
+
+//     // initServer(botInstance)
+// }

@@ -1,5 +1,5 @@
 import { QueryTypes } from "sequelize"
-import { dataBase } from "src/database/config/config"
+import { _DataBase } from "src/database"
 
 
 
@@ -12,7 +12,7 @@ export const getTokenTelegramById = async ( botId ) => {
         `
         SELECT * FROM public."chatBot" WHERE "id" = ${botId};
         `
-        const data = await dataBase.query( query  , {
+        const data = await _DataBase.instance.sequelize.query( query  , {
             type: QueryTypes.SELECT
         })
 

@@ -6,15 +6,19 @@ dotenv.config()
 import { env } from 'process'
 
 
+export interface IconfigDb {
+    DB_NAME: string;
+    DB_USER: string;
+    DB_PASSWORD: string;
+    DB_HOST: string;
+    DB_PORT: string;
 
-export const dataBase = new Sequelize(
-    String(env.DB_NAME),
-    String(env.DB_USER),
-    String(env.DB_PASSWORD),
-    {
-        host: String(env.DB_HOST),
-        port: Number(env.DB_PORT),
-        dialect: 'postgres'
-    }
-);
+}
 
+export const configDb: IconfigDb = {
+    DB_NAME: env.DB_NAME,
+    DB_USER: env.DB_USER,
+    DB_PASSWORD: env.DB_PASSWORD,
+    DB_HOST: env.DB_HOST,
+    DB_PORT: env.DB_PORT
+}
