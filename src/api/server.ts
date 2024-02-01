@@ -84,7 +84,3 @@ export default class Server {
       this._app.listen(this._port, callback)
     }
   }
-  
-  
-  
-  
