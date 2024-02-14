@@ -72,10 +72,10 @@ export default class Server {
       this._app.use('/api', this._router);
       this._router.use("/", unprotectedRouterAuth);
 
-      this._router.use(
-        passport.authenticate("jwt", { session: false }),
-        handleAuthError
-      );
+      // this._router.use(
+      //   passport.authenticate("jwt", { session: false }),
+      //   handleAuthError
+      // );
 
 
       
