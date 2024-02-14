@@ -1,5 +1,5 @@
 import { _DataBase } from "src/database"
-import { clientAttributes } from "../../database/models/clients.model"
+import { clientAttributes } from "../database/models/clients.model"
 import { Transaction } from "sequelize";
 
 

@@ -5,8 +5,17 @@ import routerTelegram from './telegram/routes/telegram.router'
 import routerWhatsApp from './whatsapp/routes/whatsApp.router'
 import { mainBotWs } from './whatsapp'
 import { adProvider } from './whatsapp/provider'
-import { createBotWs, flowStaticRentCar } from './whatsapp/templates/statickCarsRent'
-import database from './whatsapp/database'
+import { createBotWs, flowStaticRentCar } from './whatsapp/templates/rentCars/statickCarsRent'
+import passport from "passport";
+import { superAdminRoutes } from './super_admin/routes/super_admin.routes';
+import { partnerRouter } from './partner/routes/partner.routes'
+import { partnerRouter as routerCompany } from './partner/routes/partner.routes'
+import { partnerRouter as routerAgent } from './partner/routes/partner.routes'
+import { partnerRouter as routerClient } from './partner/routes/partner.routes'
+import passportMiddleware from 'src/middlewares/passport'
+import { handleAuthError } from 'src/middlewares/passport-auth'
+import { router as userRouter } from './users/routes/user.routes'
+import { unprotectedRouter as unprotectedRouterAuth } from './auth/routes/auth.route'
 
 
 
@@ -31,7 +40,7 @@ export default class Server {
       this.middlewares()
       this.routes()
       this.errors()
-      createBotWs()
+      // createBotWs()
       
     }
   
@@ -54,15 +63,43 @@ export default class Server {
           parameterLimit: 350000,
         })
       )
+
+      this._router.use(passport.initialize());
+      passport.use(passportMiddleware);
     }
     
     routes() {
+      this._app.use('/api', this._router);
+      this._router.use("/", unprotectedRouterAuth);
 
-        this._app.use('/api', this._router);
+      this._router.use(
+        passport.authenticate("jwt", { session: false }),
+        handleAuthError
+      );
 
-        this._router.use('/telegram', routerTelegram)
 
-        this._router.use('/whatsapp', routerWhatsApp)
+      
+      
+      // this._router.use(
+      //   passport.authenticate("jwt", { session: false }),
+      //   handleAuthError
+      //   );
+
+        // this._router.use('/telegram', routerTelegram);
+
+        // this._router.use('/whatsapp', routerWhatsApp);
+
+        // this._router.use('/super_admin', superAdminRoutes);
+
+        // this._router.use('/partner', partnerRouter);
+
+        // this._router.use('/company', routerCompany);
+
+        // this._router.use('/agent', routerAgent);
+
+        // this._router.use('/client', routerClient);
+
+        this._router.use('/user', userRouter);
 
 
     }
