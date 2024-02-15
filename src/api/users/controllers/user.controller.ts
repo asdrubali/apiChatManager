@@ -105,7 +105,7 @@ export const updateUserController = async (
   next: NextFunction
 ) => {
   try {
-    const { userId } = req.user as IToken;
+    // const { userId } = req.user as IToken;
     const { id } = req.params;
     const dataUpdate = req.body 
 
@@ -149,7 +149,7 @@ export const disableEnabledUserForAdminController = async (
   next: NextFunction
 ) => {
   try {
-    const { userId } = req.user as IToken;
+    // const { userId } = req.user as IToken;
     const { id } = req.params;
 
     const result = await disableOrEnableUserById({
