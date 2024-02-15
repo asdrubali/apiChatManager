@@ -38,7 +38,7 @@ export default new Strategy(opts, async (payload: any, done) => {
 
     console.log(payload);
     
-    console.log('entrop');
+    console.log('entro');
     
     
     const token: TokenAttributes | null = await findOneToken({

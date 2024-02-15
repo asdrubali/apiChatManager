@@ -7,7 +7,6 @@ import { mainBotWs } from './whatsapp'
 import { adProvider } from './whatsapp/provider'
 import { createBotWs, flowStaticRentCar } from './whatsapp/templates/rentCars/statickCarsRent'
 import passport from "passport";
-import { superAdminRoutes } from './super_admin/routes/super_admin.routes';
 import { partnerRouter } from './partner/routes/partner.routes'
 import { partnerRouter as routerCompany } from './partner/routes/partner.routes'
 import { partnerRouter as routerAgent } from './partner/routes/partner.routes'
@@ -65,6 +64,7 @@ export default class Server {
       )
 
       this._router.use(passport.initialize());
+      
       passport.use(passportMiddleware);
     }
     
@@ -77,9 +77,6 @@ export default class Server {
       //   handleAuthError
       // );
 
-
-      
-      
       // this._router.use(
       //   passport.authenticate("jwt", { session: false }),
       //   handleAuthError
@@ -88,8 +85,6 @@ export default class Server {
         // this._router.use('/telegram', routerTelegram);
 
         // this._router.use('/whatsapp', routerWhatsApp);
-
-        // this._router.use('/super_admin', superAdminRoutes);
 
         // this._router.use('/partner', partnerRouter);
 

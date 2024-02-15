@@ -37,7 +37,7 @@ export const getUserAccountController = async (
   try {
     // const user = req.user as IToken;
 
-    console.log(req.userId);
+    
     
     // const userAccount = await getAccountById(user.userId);
 
@@ -176,47 +176,41 @@ export const createUserController = async (
 //   }
 // };
 
-// export const listUsersController = async (
-//   req: Request<any, any, any, IUserQueryParams>,
-//   res: Response,
-//   next: NextFunction
-// ) => {
-//   try {
-//     const queryParams = req.query;
-//     const page = Number(queryParams.page) || undefined;
-//     const limit = Number(queryParams.limit) || undefined;
+export const listUserController = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    // const queryParams = req.query;
+    // const page = Number(queryParams.page) || undefined;
+    // const limit = Number(queryParams.limit) || undefined;
 
-//     // TODO: Optimizar
-//     let where: any = undefined;
-//     if (queryParams.useFilters) {
-//       where = {};
-//       let { office_id, area_id, fullName } = queryParams;
-//       if (office_id) where.office_id = office_id;
-//       if (area_id) where.area_id = area_id;
-//       if (fullName) where.fullName = fullName;
-//     }
+    // TODO: Optimizar
+    // let where: any = undefined;
+    // if (queryParams.useFilters) {
+    //   where = {};
+    //   let { office_id, area_id, fullName } = queryParams;
+    //   if (office_id) where.office_id = office_id;
+    //   if (area_id) where.area_id = area_id;
+    //   if (fullName) where.fullName = fullName;
+    // }
 
-//     // TODO: Es experimental, borrar si no funciona
-//     //const columns = queryParams?.columns ? queryParams?.columns?.split(',').map( (e) => e.trim()) : undefined
+    // TODO: Es experimental, borrar si no funciona
+    //const columns = queryParams?.columns ? queryParams?.columns?.split(',').map( (e) => e.trim()) : undefined
 
-//     const resp = await getUsersList({
-//       page,
-//       limit,
-//       filters: {
-//         fullName: where?.fullName,
-//       },
-//     });
-//     let message = "Lista de usuarios obtenidos correctamente";
+    const resp = await getUsersList();
+    let message = "Lista de usuarios obtenidos correctamente";
 
-//     if (resp.rows.length === 0) {
-//       message = "No se encontraron usuarios";
-//     }
+    if (resp.length === 0) {
+      message = "No se encontraron usuarios";
+    }
 
-//     res.status(200).json(successResponse(resp, 200, message));
-//   } catch (err: any) {
-//     errorControl(err, next);
-//   }
-// };
+    res.status(200).json(successResponse(resp, 200, message));
+  } catch (err: any) {
+    errorControl(err, next);
+  }
+};
 
 // export const updateMyUserPasswordController = async (
 //   req: Request,

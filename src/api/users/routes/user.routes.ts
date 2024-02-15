@@ -11,7 +11,12 @@ import {
 import { paginationValidator } from "../../../validators/pagination.validator";
 import { verifyAccess } from "src/middlewares/user-access";
 import { allValidator } from "src/helpers/handleValidator";
-import { createUserController, getUserAccountController } from '../controllers/user.controller';
+import { 
+  createUserController, 
+  getUserAccountController, 
+  listUserController
+} from '../controllers/user.controller';
+
 
 export const router: Router = Router();
 
@@ -44,13 +49,7 @@ router.post(
 //   findUserInformationByIdController
 // );
 
-// router.get(
-//   "/list",
-//   verifyAccess,
-//   paginationValidator,
-//   allValidator,
-//   listUsersController
-// );
+router.get("/list",listUserController);
 // router.put(
 //   "/disable/:id",
 //   verifyAccess,

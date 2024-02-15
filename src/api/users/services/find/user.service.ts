@@ -13,51 +13,11 @@ import {
 import { _DataBase } from "src/database";
 
 const getUsersList = async (
-  options: { page?: number; limit?: number; filters?: any } | undefined
+  // options: { page?: number; limit?: number; filters?: any } | undefined
 ) => {
   try {
-    const { page, limit, filters } = options || {};
 
-    // Por defecto para que no se concideren en el where
-    const { fullName = "", userStatus = -1 } = filters || {};
-    const replacements = {
-      fullName,
-      userStatus,
-    };
-
-    const qColumns = `
-      u.id, u.name, u.paternal_lastname, u.maternal_lastname,
-      u.date_of_birth, u.username, u.email, 
-      u.status, u.created_date,
-      u.document_type, u.document_number, u.gender
-  `;
-
-    const qSelect = `
-      select {{columns}}
-      from user u
-    `;
-
-    const qWhere = `
-      where 
-        1 = 1
-        && ( :fullName is null or :fullName = '' or lower(concat(u.name, ' ', u.maternal_lastname, ' ', u.paternal_lastname)) like concat('%',lower(:fullName), '%') )
-        && ( -1 = :userStatus or u.status = :userStatus )
-
-    `;
-
-    const qOrderBy = `order by u.created_date desc`;
-
-    const result = await paginatedListGenerator({
-      structure: {
-        qColumns,
-        qSelect,
-        qWhere,
-        qOrderBy,
-      },
-      limit,
-      page,
-      replacements,
-    });
+    const result = await _DataBase.instance.user.findAll()
 
     return result;
   } catch (error) {
