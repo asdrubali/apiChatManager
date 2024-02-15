@@ -89,15 +89,11 @@ export function UserFactory(sequelize: Sequelize): UserStatic {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      document_type: {
+      user_type: {
         type: DataTypes.STRING,
         allowNull: true,
       },
-      document_number: {
-        type: DataTypes.STRING,
-        allowNull: true,
-        // unique: true,
-      },
+
       salt: {
         type: DataTypes.STRING,
         allowNull: false,
@@ -135,18 +131,9 @@ export function UserFactory(sequelize: Sequelize): UserStatic {
         allowNull: true,
       },
 
-      device_id: {
-        type: DataTypes.STRING(1000),
-        allowNull: true,
-      },
 
       recovery_code: {
         type: DataTypes.STRING(50),
-        allowNull: true,
-      },
-
-      tenant: {
-        type: DataTypes.BIGINT,
         allowNull: true,
       },
 

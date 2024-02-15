@@ -15,6 +15,9 @@ import { _DataBase } from "src/database";
 const getUsersList = async () => {
   try {
 
+    console.log('entro');
+    
+
     const result = await _DataBase.instance.user.findAll({
       attributes: {
         include: ['name','last_name','user_type','username','email','status']

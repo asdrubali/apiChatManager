@@ -98,7 +98,7 @@ export class _DataBase {
 
         // this.token.sync({ alter: true, logging: console.log })
 
-        // this.user.sync({ alter: true, logging: console.log });
+        // this.user.sync({ force: true, logging: console.log });
         
         console.log('¡Run database!')
       })
