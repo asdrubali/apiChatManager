@@ -12,11 +12,13 @@ export const disableOrEnableUserById = async ({
   transaction?: Transaction;
 }) => {
   try {
+    const user = await _DataBase.instance.user.findByPk(userId)
+
     return await _DataBase.instance.user.update(
       {
-        status: literal("CASE WHEN status = true THEN false ELSE true END"),
+        is_deleted: !user.is_deleted,
         updated_date: moment().utc().toDate(),
-        updated_by: updatedBy,
+        updated_by: 1,
       },
       {
         where: {

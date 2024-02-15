@@ -13,8 +13,10 @@ import { verifyAccess } from "src/middlewares/user-access";
 import { allValidator } from "src/helpers/handleValidator";
 import { 
   createUserController, 
+  disableEnabledUserForAdminController, 
   getUserAccountController, 
-  listUserController
+  listUserController,
+  updateUserController
 } from '../controllers/user.controller';
 
 
@@ -33,13 +35,13 @@ router.post(
   createUserController
 );
 
-// router.put(
-//   "/update/:id",
-//   verifyAccess,
-//   updateUserDtoValidator,
-//   allValidator,
-//   updateUserController
-// );
+router.put(
+  "/update/:id",
+  // verifyAccess,
+  // updateUserDtoValidator,
+  // allValidator,
+  updateUserController
+);
 
 // router.get(
 //   "/find/:id",
@@ -50,13 +52,14 @@ router.post(
 // );
 
 router.get("/list",listUserController);
-// router.put(
-//   "/disable/:id",
-//   verifyAccess,
-//   IdValidator,
-//   allValidator,
-//   disableEnabledUserForAdminController
-// );
+
+router.put(
+  "/disable/:id",
+  // verifyAccess,
+  // IdValidator,
+  // allValidator,
+  disableEnabledUserForAdminController
+);
 
 // router.patch(
 //   "/change/password",

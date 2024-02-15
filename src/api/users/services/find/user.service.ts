@@ -12,12 +12,17 @@ import {
 } from "../../interfaces/user-query-list";
 import { _DataBase } from "src/database";
 
-const getUsersList = async (
-  // options: { page?: number; limit?: number; filters?: any } | undefined
-) => {
+const getUsersList = async () => {
   try {
 
-    const result = await _DataBase.instance.user.findAll()
+    const result = await _DataBase.instance.user.findAll({
+      attributes: {
+        include: ['name','last_name','user_type','username','email','status']
+      },
+      where: {
+        is_deleted: false
+      }
+    })
 
     return result;
   } catch (error) {

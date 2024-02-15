@@ -7,6 +7,7 @@ import {
   getUsersList,
 } from "../services/find/user.service";
 import {
+  updateUserById,
   // updateUserById,
   updateUserPassword,
 } from "../services/update/user.service";
@@ -35,11 +36,7 @@ export const getUserAccountController = async (
   next: NextFunction
 ) => {
   try {
-    // const user = req.user as IToken;
 
-    
-    
-    // const userAccount = await getAccountById(user.userId);
 
     return res
       .status(200)
@@ -102,79 +99,71 @@ export const createUserController = async (
   }
 };
 
-// export const updateUserController = async (
-//   req: Request,
-//   res: Response,
-//   next: NextFunction
-// ) => {
-//   try {
-//     const { userId } = req.user as IToken;
-//     const { id } = req.params;
-//     const { roles, name, paternal_lastname, email, document_number, tenant } =
-//       req.body as UpdateUserDto;
+export const updateUserController = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const { userId } = req.user as IToken;
+    const { id } = req.params;
+    const dataUpdate = req.body 
 
-//     const transaction = await _DataBase.instance.sequelize.transaction();
-//     let isSuccess;
-//     try {
-//       await updateUserById({
-//         userId: +id,
-//         updateUserDto: {
-//           name,
-//           paternal_lastname,
-//           roles,
-//           email,
-//           document_number,
-//           tenant,
-//         },
-//         transaction,
-//         updatedBy: userId,
-//       });
+    const transaction = await _DataBase.instance.sequelize.transaction();
+    let isSuccess;
+    try {
+      await updateUserById({
+        userId: +id,
+        updateUserDto: dataUpdate,
+        transaction,
+        updatedBy: 1,
+      });
 
-//       await transaction.commit();
-//       isSuccess = true;
-//     } catch (error) {
-//       isSuccess = false;
-//       await transaction.rollback();
-//     }
+      await transaction.commit();
+      isSuccess = true;
+    } catch (error) {
+      isSuccess = false;
+      await transaction.rollback();
+    }
 
-//     if (!isSuccess) {
-//       return res
-//         .status(500)
-//         .json(
-//           errorResponse(
-//             "Sucedió un error inesperado al actualizar los datos del usuario. Consulte con su administrador",
-//             500
-//           )
-//         );
-//     }
+    if (!isSuccess) {
+      return res
+        .status(500)
+        .json(
+          errorResponse(
+            "Sucedió un error inesperado al actualizar los datos del usuario. Consulte con su administrador",
+            500
+          )
+        );
+    }
 
-//     return res.status(200).json("Datos del usuario actualizados correctamente");
-//   } catch (err: any) {
-//     errorControl(err, next);
-//   }
-// };
+    return res.status(200).json("Datos del usuario actualizados correctamente");
+  } catch (err: any) {
+    errorControl(err, next);
+  }
+};
 
-// export const disableEnabledUserForAdminController = async (
-//   req: Request,
-//   res: Response,
-//   next: NextFunction
-// ) => {
-//   try {
-//     const { userId } = req.user as IToken;
-//     const { id } = req.params;
+export const disableEnabledUserForAdminController = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const { userId } = req.user as IToken;
+    const { id } = req.params;
 
-//     const result = await disableOrEnableUserById({
-//       userId: +id,
-//       updatedBy: userId,
-//     });
+    const result = await disableOrEnableUserById({
+      userId: +id,
+      updatedBy: 1,
+    });
 
-//     res
-//       .status(200)
-//       .json(successResponse(result, 200, "Usuario actualizado correctamente"));
-//   } catch (err: any) {
-//     errorControl(err, next);
-//   }
-// };
+    res
+      .status(200)
+      .json(successResponse(result, 200, "Usuario actualizado correctamente"));
+  } catch (err: any) {
+    errorControl(err, next);
+  }
+};
 
 export const listUserController = async (
   req: Request,
@@ -182,22 +171,7 @@ export const listUserController = async (
   next: NextFunction
 ) => {
   try {
-    // const queryParams = req.query;
-    // const page = Number(queryParams.page) || undefined;
-    // const limit = Number(queryParams.limit) || undefined;
 
-    // TODO: Optimizar
-    // let where: any = undefined;
-    // if (queryParams.useFilters) {
-    //   where = {};
-    //   let { office_id, area_id, fullName } = queryParams;
-    //   if (office_id) where.office_id = office_id;
-    //   if (area_id) where.area_id = area_id;
-    //   if (fullName) where.fullName = fullName;
-    // }
-
-    // TODO: Es experimental, borrar si no funciona
-    //const columns = queryParams?.columns ? queryParams?.columns?.split(',').map( (e) => e.trim()) : undefined
 
     const resp = await getUsersList();
     let message = "Lista de usuarios obtenidos correctamente";

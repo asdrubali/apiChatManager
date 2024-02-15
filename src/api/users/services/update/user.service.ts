@@ -70,46 +70,28 @@ export const basicUpdateUserById = async ({
   );
 };
 
-// export const updateUserById = async ({
-//   userId,
-//   updateUserDto,
-//   updatedBy,
-//   transaction,
-// }: {
-//   userId: number;
-//   updateUserDto: UpdateUserDto;
-//   updatedBy?: number | null;
-//   transaction?: Transaction;
-// }) => {
-//   const { ...data } = updateUserDto;
-//   try {
-//     let userUpdate = await basicUpdateUserById({
-//       user: data,
-//       userId,
-//       updatedBy,
-//       transaction,
-//     });
+export const updateUserById = async ({
+  userId,
+  updateUserDto,
+  updatedBy,
+  transaction,
+}: {
+  userId: number;
+  updateUserDto: any;
+  updatedBy?: number | null;
+  transaction?: Transaction;
+}) => {
+  try {
+    let userUpdate = await basicUpdateUserById({
+      user: updateUserDto,
+      userId,
+      updatedBy,
+      transaction,
+    });
 
-//     // if (roles) {
-//     //   const { add, remove } = roles;
 
-//       // Si hay para remover
-//       // if (remove && remove.length > 0) {
-//       //   await destroyUserRole({
-//       //     userId,
-//       //     roleIds: remove,
-//       //     transaction,
-//       //   });
-//       // }
-
-//       // // Si se desea incorporar nuevos
-//       // if (add && add.length > 0) {
-//       //   await setRolesForUser({ userId, roleIds: add, transaction });
-//       // }
-//     }
-
-//     return userUpdate;
-//   } catch (error) {
-//     throw error;
-//   }
-// };
+    return userUpdate;
+  } catch (error) {
+    throw error;
+  }
+};
