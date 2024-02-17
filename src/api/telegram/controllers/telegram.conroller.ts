@@ -13,6 +13,9 @@ export const telegramController = async (req: Request, res: Response) => {
         
         const { idUser, idToken }= req.body;
 
+        console.log({ idUser, idToken });
+        
+
         if(!idToken){
           res.status(400).json({msg: "es necesario enviar el token"})
         }
@@ -26,8 +29,6 @@ export const telegramController = async (req: Request, res: Response) => {
 
         if(!existChat){
 
-          res.status(400).json({msg: "el token ya esta registrado"})
-
           const newChat = _DataBase.instance.chatBot.create({
             user_id: idUser,
             token_id: idToken,
@@ -39,7 +40,7 @@ export const telegramController = async (req: Request, res: Response) => {
 
         initBotTelegram(idToken)
 
-        // const result = await createBotTelegramService(idToken)
+        const result = await createBotTelegramService(idToken)
         
         res.status(200).json({
           msg: `Telegram activo con el token ${idToken}`

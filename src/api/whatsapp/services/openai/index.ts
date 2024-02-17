@@ -5,7 +5,7 @@ import { DATE_BASE_SUCURSAL } from "../../database/dataPlantilla/rentCars";
 // import { DATE_BASE_SUCURSAL } from "src/whatsapp/database/dataPlantilla/rentCars";
 
 const openai = new OpenAI({
-    apiKey: process.env.OPENAI_API_KEY,
+    apiKey: "OFozwDAZAVo4yy5akSFmT3BlbkFJaeMtyoxFUJRx0k9Y4eC6",
 });
 
 /**
