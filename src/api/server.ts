@@ -82,9 +82,9 @@ export default class Server {
       //   handleAuthError
       //   );
 
-        // this._router.use('/telegram', routerTelegram);
+        this._router.use('/telegram', routerTelegram);
 
-        // this._router.use('/whatsapp', routerWhatsApp);
+        this._router.use('/whatsapp', routerWhatsApp);
 
         // this._router.use('/partner', partnerRouter);
 
