@@ -21,11 +21,12 @@ export const telegramController = async (req: Request, res: Response) => {
         }
 
 
-        const existChat = await _DataBase.instance.chatBot.findOne({
-          where:{
-            token_id: idToken
-          }
+        const existChat = await _DataBase.instance.sequelize.query( `SELECT * FROM public."chatBot" WHERE "token_id" = '${idToken}';`,{
+          type: QueryTypes.SELECT
         })
+
+        console.log(existChat);
+        
 
         if(!existChat){
 

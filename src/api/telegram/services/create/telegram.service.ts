@@ -3,14 +3,14 @@ import { initBotTelegram } from "../../templates/rentCars"
 
 
 
-export const createBotTelegramService = async (botId) => {
+export const createBotTelegramService = async (tokenID: any) => {
     try {
 
-        const data: any = await getTokenTelegramById(botId)
+        // const data: any = await getTokenTelegramById(tokenID)
         
-        initBotTelegram(data.tokenID)
+        initBotTelegram(tokenID)
 
-        return data
+        return 'ok'
         
     } catch (error) {
         console.error(error)

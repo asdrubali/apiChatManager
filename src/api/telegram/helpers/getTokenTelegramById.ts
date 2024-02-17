@@ -6,11 +6,11 @@ import { _DataBase } from "src/database"
 
 
 
-export const getTokenTelegramById = async ( botId ) => {
+export const getTokenTelegramById = async ( tokenID ) => {
     try {
         let query = 
         `
-        SELECT * FROM public."chatBot" WHERE "id" = ${botId};
+        SELECT * FROM public."chatBot" WHERE "id" = ${tokenID};
         `
         const data = await _DataBase.instance.sequelize.query( query  , {
             type: QueryTypes.SELECT
