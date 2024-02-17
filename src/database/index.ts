@@ -10,6 +10,7 @@ import { TypeCarFactory, TypeCarStatic } from 'src/api/whatsapp/templates/rentCa
 import { FrequenTQuestionsFactory, FrequenTQuestionsStatic, FrequentQuestionsAttributes } from 'src/api/whatsapp/database/models/frequent_questions.model';
 import { UserFactory, UserStatic } from 'src/api/users/models/user.model';
 import { TokenFactory, TokenStatic } from 'src/api/token/models/token.model';
+import { ChatBotFactory, ChatBotStatic } from './models/chatBot.model';
 
 
 
@@ -38,6 +39,8 @@ export class _DataBase {
   
   public token: TokenStatic;
 
+  public chatBot: ChatBotStatic;
+
   constructor() {
     this.sequelize = new Sequelize(
       this._config.DB_NAME!,
@@ -65,6 +68,7 @@ export class _DataBase {
     this.TypeCar = TypeCarFactory(this.sequelize);
     this.FrequenTQuestions = FrequenTQuestionsFactory(this.sequelize);
     this.token = TokenFactory(this.sequelize);
+    this.chatBot = ChatBotFactory(this.sequelize);
 
     this.associations()
     this.connectDb()
@@ -99,6 +103,9 @@ export class _DataBase {
         // this.token.sync({ alter: true, logging: console.log })
 
         // this.user.sync({ force: true, logging: console.log });
+
+        // this.chatBot.sync({ force: true, logging: console.log });
+        
         
         console.log('¡Run database!')
       })
