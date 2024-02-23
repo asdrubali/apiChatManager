@@ -10,7 +10,7 @@ import { Request } from 'express'; // Importa la interfaz Request desde express
 
 const opts: StrategyOptions = {
   jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-  secretOrKey: "BpvnW%H4e&iBMV",
+  secretOrKey: "test233333",
 };
 
 export type CustomPassportErrorReason =
@@ -86,7 +86,8 @@ export default new Strategy(opts, async (payload: any, done) => {
     console.log(user);
     
 
-    // Agrega el objeto user al req.user para que esté disponible en las solicitudes
+    // Agreg el objeto user al req.user para que esté disponible en las solicitudes
+
     done(null, user);
   } catch (error) {
     console.log(error);

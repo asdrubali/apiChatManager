@@ -11,6 +11,7 @@ import {
   IUserInformation,
 } from "../../interfaces/user-query-list";
 import { _DataBase } from "src/database";
+import { Op } from "sequelize";
 
 const getUsersList = async () => {
   try {
@@ -131,5 +132,29 @@ const findUserInformationById = async (userId: number) => {
     throw error;
   }
 };
+
+export const findUserById = async ({
+  id,
+  attributes,
+}: {
+  id: number
+  attributes?: FindAttributeOptions
+}): Promise<UserAttributes> => {
+  try {
+    return (
+      await _DataBase.instance.user.findOne({
+        where: {
+          [Op.and]: {
+            id,
+            is_deleted: false,
+          },
+        },
+        attributes,
+      })
+    )?.get({ plain: true })!
+  } catch (err) {
+    throw err
+  }
+}
 
 export { getUsersList, findOneUser, getAccountById, findUserInformationById };

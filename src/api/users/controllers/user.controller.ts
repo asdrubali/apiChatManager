@@ -2,6 +2,7 @@ import { NextFunction, Request, Response } from "express";
 
 import {
   findOneUser,
+  findUserById,
   findUserInformationById,
   getAccountById,
   getUsersList,
@@ -37,16 +38,29 @@ export const getUserAccountController = async (
 ) => {
   try {
 
+    const { userId } = req.user as IToken
+
+    const userAccount = await findUserById({
+      id: userId,
+      attributes: [
+        'id',
+        'name',
+        'last_name',
+        'user_type',
+        'username',
+        'email'
+      ],
+    },
+    );
 
     return res
       .status(200)
       .json(
-        // successResponse(
-        //   // userAccount,
-        //   200,
-        //   // "Cuenta del usuario obtenida correctamente"
-        // )
-        "ok"
+        successResponse(
+          userAccount,
+          200,
+          "Cuenta del usuario obtenida correctamente"
+        )
       );
   } catch (err: any) {
     errorControl(err, next);
