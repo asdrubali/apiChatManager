@@ -146,7 +146,7 @@ export const getListConversationServices = async (userId: number) => {
       return {
           ...covPlain,
           contacts: client,
-          message: message
+          messages: message
       };
     });
 
