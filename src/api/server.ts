@@ -15,6 +15,9 @@ import passportMiddleware from 'src/middlewares/passport'
 import { handleAuthError } from 'src/middlewares/passport-auth'
 import { router as userRouter } from './users/routes/user.routes'
 import { unprotectedRouter as unprotectedRouterAuth } from './auth/routes/auth.route'
+import { messageRouter } from './messages/router/message.routes'
+import { contactRouter } from './contacts/routes/contact.routes'
+import { conversationRouter } from './conversation/router/conversation.routes'
 
 
 
@@ -110,9 +113,17 @@ export default class Server {
 
         // this._router.use('/agent', routerAgent);
 
-        // this._router.use('/client', routerClient);
+        this._router.use('/message', messageRouter);
+
+        this._router.use('/client', contactRouter);
 
         this._router.use('/user', userRouter);
+
+        this._router.use('/conversation', conversationRouter);
+
+        this._router.use('/message', messageRouter);
+
+        this._router.use('/contactRouter', contactRouter);
 
 
     }

@@ -11,6 +11,9 @@ import { FrequenTQuestionsFactory, FrequenTQuestionsStatic, FrequentQuestionsAtt
 import { UserFactory, UserStatic } from 'src/api/users/models/user.model';
 import { TokenFactory, TokenStatic } from 'src/api/token/models/token.model';
 import { ChatBotFactory, ChatBotStatic } from './models/chatBot.model';
+import { MessageFactory, MessageStatic } from 'src/api/messages/model/message.model';
+import { ContactFactory, ContactStatic } from 'src/api/contacts/model/contact.model';
+import { ConversationFactory, ConversationStatic } from 'src/api/conversation/model/conversation.model';
 
 
 
@@ -41,6 +44,12 @@ export class _DataBase {
 
   public chatBot: ChatBotStatic;
 
+  public message: MessageStatic;
+
+  public conversation: ConversationStatic;
+
+  public contact: ContactStatic;
+
   constructor() {
     this.sequelize = new Sequelize(
       this._config.DB_NAME!,
@@ -69,6 +78,9 @@ export class _DataBase {
     this.FrequenTQuestions = FrequenTQuestionsFactory(this.sequelize);
     this.token = TokenFactory(this.sequelize);
     this.chatBot = ChatBotFactory(this.sequelize);
+    this.message = MessageFactory(this.sequelize);
+    this.conversation = ConversationFactory(this.sequelize);
+    this.contact = ContactFactory(this.sequelize);
 
     this.associations()
     this.connectDb()
@@ -105,6 +117,12 @@ export class _DataBase {
         // this.user.sync({ force: true, logging: console.log });
 
         // this.chatBot.sync({ force: true, logging: console.log });
+
+        // this.message.sync({ force: true, logging: console.log });
+
+        // this.conversation.sync({ force: true, logging: console.log });
+
+        this.contact.sync({ force: true, logging: console.log });
         
         
         console.log('¡Run database!')
