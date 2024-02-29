@@ -86,8 +86,6 @@ import { _DataBase } from "src/database";
 export const getListConversationServices = async (userId: number) => {
   try {
 
-    const finalData = [] 
-
      const conversation = await _DataBase.instance.conversation.findAll({
         where:{
             user_id: userId
@@ -105,48 +103,54 @@ export const getListConversationServices = async (userId: number) => {
 
 
 
-    conversation.forEach( async (cov) => {
-        const message = await _DataBase.instance.message.findAll(
-            {
-            where:{
-                conversation_id: cov.id
-            },
-            attributes: {
+    const promises = conversation.map(async (cov) => {
+      
+
+      const messagePromise = _DataBase.instance.message.findAll({
+          where: {
+              conversation_id: cov.id
+          },
+          attributes: {
               exclude: [
-                "is_deleted",
-                "created_date",
-                "updated_date",
-                "created_by",
-                "updated_by",
+                  "is_deleted",
+                  "created_date",
+                  "updated_date",
+                  "created_by",
+                  "updated_by",
               ],
-            },
-          });
-
-          const client = await _DataBase.instance.client.findAll({
-            where:{
-                id: {
-                    [Op.in]: cov.contacts
-                }
-            },
-            attributes: {
+          },
+      });
+      
+    
+      const clientPromise = _DataBase.instance.client.findAll({
+          where: {
+              id: {
+                  [Op.in]: cov.contacts
+              }
+          },
+          attributes: {
               exclude: [
-                "is_deleted",
-                "created_date",
-                "updated_date",
-                "created_by",
-                "updated_by",
+                  "is_deleted",
+                  "created_date",
+                  "updated_date",
+                  "created_by",
+                  "updated_by",
               ],
-            },
-          });
+          },
+      });
+    
+      const [message, client] = await Promise.all([messagePromise, clientPromise]);
 
-          finalData.push({
-            ...cov,
-            contacts:client,
-            message: message
-          })
+      const covPlain = cov.get({ plain: true });
+    
+      return {
+          ...covPlain,
+          contacts: client,
+          message: message
+      };
+    });
 
-    } )
-
+    const finalData = await Promise.all(promises);
 
     return finalData
 

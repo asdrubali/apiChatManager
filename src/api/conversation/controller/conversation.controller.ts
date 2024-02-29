@@ -46,6 +46,9 @@ export const getListConversationController = async (
     const { userId } = req.user as IToken;
 
     const resp = await getListConversationServices(userId);
+
+    console.log(resp);
+    
     let message = "Lista de conversaciones obtenidos correctamente";
 
     if (!resp) {

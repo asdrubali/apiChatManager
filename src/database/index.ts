@@ -122,7 +122,7 @@ export class _DataBase {
 
         // this.conversation.sync({ force: true, logging: console.log });
 
-        this.contact.sync({ force: true, logging: console.log });
+        // this.contact.sync({ force: true, logging: console.log });
         
         
         console.log('¡Run database!')
