@@ -60,6 +60,8 @@ export const getListConversationController = async (
 
     res.status(200).json(successResponse(resp, 200, message));
   } catch (err: any) {
+    console.log(err);
+    
     errorControl(err, next);
   }
 };

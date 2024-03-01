@@ -4,8 +4,9 @@ export interface clientAttributes {
   id: number;
   phone: string;
   name: string;
-  lastName: string;
+  last_name: string;
   status: boolean;
+  avatar: string;
 
   created_at?: Date | null;
   created_by?: number | null;
@@ -47,7 +48,11 @@ export function clientFactory(sequelize: Sequelize): clientStatic {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      lastName: {
+      last_name: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      avatar: {
         type: DataTypes.STRING,
         allowNull: false,
       },

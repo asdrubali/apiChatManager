@@ -20,7 +20,7 @@ export interface ContactModel
   extends Model<ContactAttributes>,
     ContactAttributes {}
 
-export class Company extends Model<ContactAttributes, ContactModel> {}
+export class Contact extends Model<ContactAttributes, ContactModel> {}
 
 export type ContactStatic = typeof Model & {
   new (values?: object, options?: BuildOptions): ContactModel;

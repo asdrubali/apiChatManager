@@ -114,13 +114,13 @@ export class _DataBase {
 
         // this.token.sync({ alter: true, logging: console.log })
 
-        // this.user.sync({ force: true, logging: console.log });
+        // this.user.sync({ alter: true, logging: console.log });
 
-        // this.chatBot.sync({ force: true, logging: console.log });
+        // this.chatBot.sync({ alter: true, logging: console.log });
 
-        // this.message.sync({ force: true, logging: console.log });
+        // this.message.sync({ alter: true, logging: console.log });
 
-        // this.conversation.sync({ force: true, logging: console.log });
+        // this.conversation.sync({ alter: true, logging: console.log });
 
         // this.contact.sync({ force: true, logging: console.log });
         

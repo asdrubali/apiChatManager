@@ -124,7 +124,7 @@ export const getListConversationServices = async (userId: number) => {
       });
       
     
-      const clientPromise = _DataBase.instance.client.findAll({
+      const clientPromise = _DataBase.instance.contact.findAll({
           where: {
               id: {
                   [Op.in]: cov.contacts
