@@ -39,7 +39,11 @@ export function ContactFactory(sequelize: Sequelize): ContactStatic {
       name: {
         type: DataTypes.STRING,
         allowNull: false,
-        unique: true,
+    
+      },
+      avatar: {
+        type: DataTypes.STRING,
+        allowNull: true,
       },
       last_name: {
         type: DataTypes.STRING,

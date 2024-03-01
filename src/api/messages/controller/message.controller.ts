@@ -6,6 +6,7 @@ import { errorControl } from "src/api/functions/errorControl";
 
 import { IToken } from "src/api/interfaces/IToken.interface";
 import { createMessageService } from '../service/create/create.service';
+import { deleteMessageServices } from "../service/delete/delete.service";
 
 
 
@@ -15,9 +16,12 @@ export const createMessageController = async (
   next: NextFunction
 ) => {
   try {
-    const { userId } = req.user as IToken;
+    // const { userId } = req.user as IToken;
 
     const dataBody = req.body
+
+    console.log({dataBody});
+    
 
     const result = await createMessageService(dataBody)
 
@@ -30,20 +34,18 @@ export const createMessageController = async (
   }
 };
 
-export const getListCompanyController = async (
+export const deleteMessageController = async (
   req: Request,
   res: Response,
   next: NextFunction
 ) => {
   try {
-    const queryParams = req.query;
-    const page = Number(queryParams.page) || undefined;
-    const limit = Number(queryParams.limit) || undefined;
-    const search = (queryParams.search as string) || "";
+    const {id} = req.params;
+
+    const result = await deleteMessageServices(parseInt(id as string))
 
 
-
-    // res.status(200).json(successResponse(resp, 200, message));
+    res.status(200).json(successResponse("result", 200, 'mensaje eliminado correctamente'));
   } catch (err: any) {
     errorControl(err, next);
   }

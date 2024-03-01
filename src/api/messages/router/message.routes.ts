@@ -1,7 +1,7 @@
 import { Router } from "express";
 
 import { allValidator } from "src/helpers/handleValidator";
-import { createMessageController } from "../controller/message.controller";
+import { createMessageController, deleteMessageController } from "../controller/message.controller";
 
 
 export const messageRouter: Router = Router();
@@ -37,12 +37,7 @@ messageRouter.post(
 //   updateByIdCompanyController
 // );
 
-
-
-// messageRouter.delete(
-//   "/delete/:id",
-//   IdValidator,
-//   verifyAccess,
-//   allValidator,
-//   deleteByIdCompanyController
-// );
+messageRouter.delete(
+  "/delete/:id",
+  deleteMessageController
+);

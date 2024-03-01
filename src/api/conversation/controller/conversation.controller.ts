@@ -47,7 +47,6 @@ export const getListConversationController = async (
 
     const resp = await getListConversationServices(userId);
 
-    console.log(resp);
     
     let message = "Lista de conversaciones obtenidos correctamente";
 

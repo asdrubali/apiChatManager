@@ -4,7 +4,7 @@ export interface MessageAttributes {
   id: number;
   content: string;
   isRead: boolean;
-  date: Date; 
+  date: string; 
   sender_id: number;
   contact_id: number;
   conversation_id: number;
@@ -50,7 +50,7 @@ export function MessageFactory(sequelize: Sequelize): MessageStatic {
         allowNull: false,
       },
       date: {
-        type: DataTypes.DATE,
+        type: DataTypes.STRING,
         allowNull: false,
       },
       sender_id: {
