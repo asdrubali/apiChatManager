@@ -1,7 +1,7 @@
 import { Router } from "express";
 
 import { allValidator } from "src/helpers/handleValidator";
-import { createConversationController, getListConversationController } from "../controller/conversation.controller";
+import { createConversationController, deleteConversationController, getListConversationController } from "../controller/conversation.controller";
 
 
 export const conversationRouter: Router = Router();
@@ -39,10 +39,7 @@ conversationRouter.get(
 
 
 
-// conversationRouter.delete(
-//   "/delete/:id",
-//   IdValidator,
-//   verifyAccess,
-//   allValidator,
-//   deleteByIdCompanyController
-// );
+conversationRouter.delete(
+  "/delete/:id",
+  deleteConversationController
+);

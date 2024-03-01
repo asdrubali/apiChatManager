@@ -88,7 +88,8 @@ export const getListConversationServices = async (userId: number) => {
 
      const conversation = await _DataBase.instance.conversation.findAll({
         where:{
-            user_id: userId
+            user_id: userId,
+            is_deleted: false
         },
       attributes: {
         exclude: [
@@ -108,7 +109,8 @@ export const getListConversationServices = async (userId: number) => {
 
       const messagePromise = _DataBase.instance.message.findAll({
           where: {
-              conversation_id: cov.id
+              conversation_id: cov.id,
+              is_deleted: false
           },
           attributes: {
               exclude: [
