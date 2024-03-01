@@ -41,15 +41,14 @@ export function ConversationFactory(sequelize: Sequelize): ConversationStatic {
         type: {
         type: DataTypes.STRING,
         allowNull: false,
-        unique: true,
       },
       unread: {
         type: DataTypes.BOOLEAN,
-        allowNull: false,
+        allowNull: true,
       },
       draftMessage: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
       },
       user_id: {
         type: DataTypes.INTEGER,

@@ -18,20 +18,23 @@ export const createConversationController = async (
   try {
     const { userId } = req.user as IToken;
 
+    console.log(userId);
+    
+
     const dataBody = req.body as any;
 
     const result = await createConversationService({
       dataBody: {
        ...dataBody
       },
-      // createBy: userId,
+      createBy: userId,
       // createBy: 1,
     });
 
 
     res
       .status(200)
-      .json(successResponse(result.id, 200, "Compania Creada con Exito"));
+      .json(successResponse(result.id, 200, "conversacion Creada con Exito"));
   } catch (err: any) {
     errorControl(err, next);
   }
