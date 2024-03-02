@@ -8,11 +8,16 @@ export const createMessageService = async (dataBody: any) => {
 
     // console.log(dataBody);
     
-    const contact = await _DataBase.instance.contact.findOne({
-      where:{
-        phone: dataBody.phone
-      }
-    })
+    let contact: any = {}
+
+    if(!!dataBody.phone){
+      contact = await _DataBase.instance.contact.findOne({
+        where:{
+          phone: dataBody.phone
+        }
+      })
+    }
+
 
     
 
@@ -20,8 +25,8 @@ export const createMessageService = async (dataBody: any) => {
       {
         content: dataBody.content,
         date: new Date().toISOString(),
-        sender_id: contact.id,
-        contact_id: contact.id,
+        sender_id: dataBody.sender ? dataBody.sender : contact!.id ,
+        contact_id: dataBody.sender ? dataBody.sender : contact!.id ,
         conversation_id: 2,
         created_by: 1,
       },
