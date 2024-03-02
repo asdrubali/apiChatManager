@@ -30,6 +30,8 @@ export const createMessageController = async (
       .status(200)
       .json(successResponse(result, 200, "mensaje guardado"));
   } catch (err: any) {
+    console.log(err);
+    
     errorControl(err, next);
   }
 };

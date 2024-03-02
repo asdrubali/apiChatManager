@@ -42,7 +42,6 @@ export function MessageFactory(sequelize: Sequelize): MessageStatic {
         content: {
         type: DataTypes.STRING,
         allowNull: false,
-        unique: true,
       },
       isRead: {
         type: DataTypes.BOOLEAN,

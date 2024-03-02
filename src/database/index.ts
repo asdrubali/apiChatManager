@@ -120,6 +120,7 @@ export class _DataBase {
 
         // this.message.sync({ alter: true, logging: console.log });
 
+
         // this.conversation.sync({ alter: true, logging: console.log });
 
         // this.contact.sync({ force: true, logging: console.log });
