@@ -86,27 +86,23 @@ import { _DataBase } from "src/database";
 export const getListConversationServices = async (userId: number) => {
   try {
 
-     const conversation = await _DataBase.instance.conversation.findAll({
-        where:{
-            user_id: userId,
-            is_deleted: false
-        },
-      attributes: {
-        exclude: [
-          "is_deleted",
-          "created_date",
-          "updated_date",
-          "created_by",
-          "updated_by",
-        ],
+    const conversation = await _DataBase.instance.conversation.findAll({
+      where:{
+          user_id: userId,
+          is_deleted: false
       },
-    });
-
-
-
-    const promises = conversation.map(async (cov) => {
-      
-
+      attributes: {
+          exclude: [
+              "is_deleted",
+              "created_date",
+              "updated_date",
+              "created_by",
+              "updated_by",
+          ],
+      },
+  });
+  
+  const promises = conversation.map(async (cov) => {
       const messagePromise = _DataBase.instance.message.findAll({
           where: {
               conversation_id: cov.id,
@@ -122,8 +118,7 @@ export const getListConversationServices = async (userId: number) => {
               ],
           },
       });
-      
-    
+  
       const clientPromise = _DataBase.instance.contact.findAll({
           where: {
               id: {
@@ -140,23 +135,46 @@ export const getListConversationServices = async (userId: number) => {
               ],
           },
       });
-    
+  
       const [message, client] = await Promise.all([messagePromise, clientPromise]);
-
+  
+      const modifiedMessages = message.map(msg => ({
+          id: msg.id,
+          content: msg.content,
+          date: msg.date,
+          state: "sent", // Opcional, depende de tu lógica de negocio
+          sender: {
+              id: msg.sender_id,
+              email: "TODO",
+              name: "TODO",
+              last_name: "TODO",
+              lastSeen: new Date(), // TODO: Puedes obtener esto de algún otro lugar
+              avatar: "TODO", // TODO: Puedes obtener esto de algún otro lugar
+          },
+          replyTo: null, // TODO: Puedes ajustar esto según tus necesidades
+      }));
+  
+      const modifiedContacts = client.map(contact => ({
+          id: contact.id,
+          email: "TODO",
+          name: contact.name,
+          last_name: contact.last_name,
+          lastSeen: new Date(), // TODO: Puedes obtener esto de algún otro lugar
+          avatar: contact.avatar, // TODO: Puedes obtener esto de algún otro lugar
+      }));
+  
       const covPlain = cov.get({ plain: true });
-    
+  
       return {
-        ...cov.dataValues,
-        id: Number(cov.dataValues.id),
-          contacts: client,
-          messages: message
+          ...covPlain,
+          contacts: modifiedContacts,
+          messages: modifiedMessages
       };
-    });
-
-    const finalData = await Promise.all(promises);
-
-    return finalData
-
+  });
+  
+  const finalData = await Promise.all(promises);
+  
+  return finalData;
 
   } catch (error) {
     throw error;

@@ -5,7 +5,7 @@ export interface ContactAttributes {
   name: string;
   last_name: string;
   phone: string;
-  image_url: string;
+  avatar: string;
 
   is_deleted?: boolean;
   created_date?: Date;
@@ -52,10 +52,6 @@ export function ContactFactory(sequelize: Sequelize): ContactStatic {
       phone: {
         type: DataTypes.STRING,
         allowNull: false,
-      },
-      image_url: {
-        type: DataTypes.STRING,
-        allowNull: true,
       },
 
       is_deleted: {
