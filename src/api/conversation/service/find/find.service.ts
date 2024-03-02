@@ -167,6 +167,7 @@ export const getListConversationServices = async (userId: number) => {
   
       return {
           ...covPlain,
+          unread: modifiedMessages.length,
           contacts: modifiedContacts,
           messages: modifiedMessages
       };
