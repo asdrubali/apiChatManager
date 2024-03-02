@@ -74,33 +74,33 @@ export default class Server {
     routes() {
       this._app.use('/api', this._router);
       this._router.use("/", unprotectedRouterAuth);
-      // this._router.use(
-      //   passport.authenticate("jwt", { session: false, }),
-      //   (
-      //     err: any,
-      //     req: Request,
-      //     res: Response,
-      //     next: NextFunction
-      //   ) => {
-      //     if (err && err.source === "Passport") {
-      //       switch (err.reason) {
-      //         case "TokenNotFound":
-      //         case "TokenExpired":
-      //         case "RolesNotFound":
-      //           return res.status(401).json(err);
-      //         default:
-      //           return res.status(500).json(err);
-      //       }
-      //     } else {
-      //       next(err);
-      //     }
-      //   }
-      // );
+      this._router.use(
+        passport.authenticate("jwt", { session: false, }),
+        (
+          err: any,
+          req: Request,
+          res: Response,
+          next: NextFunction
+        ) => {
+          if (err && err.source === "Passport") {
+            switch (err.reason) {
+              case "TokenNotFound":
+              case "TokenExpired":
+              case "RolesNotFound":
+                return res.status(401).json(err);
+              default:
+                return res.status(500).json(err);
+            }
+          } else {
+            next(err);
+          }
+        }
+      );
       
-      // this._router.use(
-      //   passport.authenticate("jwt", { session: false }),
-      //   handleAuthError
-      // );
+      this._router.use(
+        passport.authenticate("jwt", { session: false }),
+        handleAuthError
+      );
 
 
         this._router.use('/telegram', routerTelegram);
