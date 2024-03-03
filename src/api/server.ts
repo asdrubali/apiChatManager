@@ -5,7 +5,7 @@ import routerTelegram from './telegram/routes/telegram.router'
 import routerWhatsApp from './whatsapp/routes/whatsApp.router'
 import { mainBotWs } from './whatsapp'
 import { adProvider } from './whatsapp/provider'
-import { createBotWs, flowStaticRentCar } from './whatsapp/templates/rentCars/statickCarsRent'
+import { createBotWs } from './whatsapp/templates/rentCars/statickCarsRent'
 import passport from "passport";
 import { partnerRouter } from './partner/routes/partner.routes'
 import { partnerRouter as routerCompany } from './partner/routes/partner.routes'
@@ -42,7 +42,7 @@ export default class Server {
       this.middlewares()
       this.routes()
       this.errors()
-      // createBotWs()
+      createBotWs()
       
     }
   
@@ -74,33 +74,33 @@ export default class Server {
     routes() {
       this._app.use('/api', this._router);
       this._router.use("/", unprotectedRouterAuth);
-      this._router.use(
-        passport.authenticate("jwt", { session: false, }),
-        (
-          err: any,
-          req: Request,
-          res: Response,
-          next: NextFunction
-        ) => {
-          if (err && err.source === "Passport") {
-            switch (err.reason) {
-              case "TokenNotFound":
-              case "TokenExpired":
-              case "RolesNotFound":
-                return res.status(401).json(err);
-              default:
-                return res.status(500).json(err);
-            }
-          } else {
-            next(err);
-          }
-        }
-      );
+      // this._router.use(
+      //   passport.authenticate("jwt", { session: false, }),
+      //   (
+      //     err: any,
+      //     req: Request,
+      //     res: Response,
+      //     next: NextFunction
+      //   ) => {
+      //     if (err && err.source === "Passport") {
+      //       switch (err.reason) {
+      //         case "TokenNotFound":
+      //         case "TokenExpired":
+      //         case "RolesNotFound":
+      //           return res.status(401).json(err);
+      //         default:
+      //           return res.status(500).json(err);
+      //       }
+      //     } else {
+      //       next(err);
+      //     }
+      //   }
+      // );
       
-      this._router.use(
-        passport.authenticate("jwt", { session: false }),
-        handleAuthError
-      );
+      // this._router.use(
+      //   passport.authenticate("jwt", { session: false }),
+      //   handleAuthError
+      // );
 
 
         this._router.use('/telegram', routerTelegram);

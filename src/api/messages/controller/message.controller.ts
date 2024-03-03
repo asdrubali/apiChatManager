@@ -5,8 +5,9 @@ import { successResponse } from "src/api/functions/apiResponses";
 import { errorControl } from "src/api/functions/errorControl";
 
 import { IToken } from "src/api/interfaces/IToken.interface";
-import { createMessageService } from '../service/create/create.service';
+import { createMessage, createMessageService } from '../service/create/create.service';
 import { deleteMessageServices } from "../service/delete/delete.service";
+import { sendMessage } from "src/api/whatsapp/templates/rentCars/statickCarsRent";
 
 
 
@@ -20,9 +21,8 @@ export const createMessageController = async (
 
     const dataBody = req.body
 
-    console.log({dataBody});
     
-
+    
     const result = await createMessageService(dataBody)
 
   

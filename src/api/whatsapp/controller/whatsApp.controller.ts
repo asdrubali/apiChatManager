@@ -44,8 +44,6 @@ export const whatsAppBotInitController = async (req: Request, res: Response) => 
 
 
 export const whatsAppBotGetQr = async (req: Request, res: Response) => {
-
-
   const PATH_QR = join(process.cwd(), `bot.qr.png`);
   const fileStream = createReadStream(PATH_QR);
   res.writeHead(200, { "Content-Type": "image/png" });
