@@ -22,7 +22,7 @@ export const createMessageService = async (dataBody: any) => {
       })
     }
 
-    const result = await sendMessage(`${contact.phone}`, `${dataBody.content}` )
+    const result = await sendMessage(contact.phone, dataBody.content )
 
     
 
