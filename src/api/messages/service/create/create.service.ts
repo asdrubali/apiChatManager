@@ -10,7 +10,7 @@ export const createMessageService = async (dataBody: any) => {
 
     // console.log(dataBody);
 
-    innitflowCatResponse('holaaa')
+    // innitflowCatResponse('holaaa')
     
     let contact: any = {}
 
@@ -42,7 +42,7 @@ export const createMessageService = async (dataBody: any) => {
 
     await ts.commit();
 
-    return "new_message";
+    return new_message;
   } catch (error) {
     await ts.rollback();
     throw error;

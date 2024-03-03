@@ -49,7 +49,7 @@ export const getListConversationController = async (
 
     const { userId } = req.user as IToken;
 
-    const resp = await getListConversationServices( userId);
+    const resp = await getListConversationServices(userId);
 
     
     let message = "Lista de conversaciones obtenidos correctamente";
