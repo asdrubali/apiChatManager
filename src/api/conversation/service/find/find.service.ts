@@ -184,7 +184,9 @@ export const getListConversationServices = async (userId: number) => {
       }));
   
       const modifiedContacts = contact.map((contact: any) => ({
-          id: contact.id,
+          id: contact.user.id,
+          client_id: contact.id,
+          type: 'client',
           email: "TODO",
           name: contact.user.name,
           last_name: contact.user.last_name,
@@ -195,7 +197,9 @@ export const getListConversationServices = async (userId: number) => {
 
       const modifiedUser = user.map(user => ({
           id: user.id,
+          client_id: '',
           email: "TODO",
+          type: 'user',
           name: user.name,
           last_name: user.last_name,
           lastSeen: new Date(), // TODO: Puedes obtener esto de algún otro lugar

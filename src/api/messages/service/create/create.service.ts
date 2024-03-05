@@ -17,7 +17,6 @@ export const createMessageService = async (dataBody: any) => {
     console.log(dataBody);
     
 
-    if(!!dataBody.phone){
       contact = await _DataBase.instance.contact.findOne({
         include: {
           model: _DataBase.instance.user
@@ -26,7 +25,6 @@ export const createMessageService = async (dataBody: any) => {
           id: dataBody.client_id
         }
       })
-    }
 
     console.log(contact);
     
@@ -38,7 +36,7 @@ export const createMessageService = async (dataBody: any) => {
         sender_id: 1,
         contact_id: 1,
         sender_user_id: dataBody.sender_user_id,
-        conversation_id: 2,
+        conversation_id: dataBody.conversation_id,
         created_by: 1,
       },
       {
