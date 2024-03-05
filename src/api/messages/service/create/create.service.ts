@@ -25,6 +25,9 @@ export const createMessageService = async (dataBody: any) => {
         }
       })
 
+      if(!!contact){
+        return 'ho se pudo enviar'
+      }
     
     
     const new_message = await _DataBase.instance.message.create(
