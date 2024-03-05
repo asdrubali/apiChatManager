@@ -6,6 +6,7 @@ export interface ConversationAttributes {
   unread: boolean,
   draftMessage: string,
   user_id: number,
+  contact_id: number,
   contacts: number[],
 
 //   date:Date;
@@ -51,6 +52,11 @@ export function ConversationFactory(sequelize: Sequelize): ConversationStatic {
         allowNull: true,
       },
       user_id: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
+
+      contact_id: {
         type: DataTypes.INTEGER,
         allowNull: false,
       },

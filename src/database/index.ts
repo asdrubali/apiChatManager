@@ -14,6 +14,7 @@ import { ChatBotFactory, ChatBotStatic } from './models/chatBot.model';
 import { MessageFactory, MessageStatic } from 'src/api/messages/model/message.model';
 import { ContactFactory, ContactStatic } from 'src/api/contacts/model/contact.model';
 import { ConversationFactory, ConversationStatic } from 'src/api/conversation/model/conversation.model';
+import { userHasOneContact } from './associations/user';
 
 
 
@@ -116,14 +117,14 @@ export class _DataBase {
 
         // this.user.sync({ alter: true, logging: console.log });
 
-        // this.chatBot.sync({ alter: true, logging: console.log });
+        // // this.chatBot.sync({ alter: true, logging: console.log });
 
-        // this.message.sync({ alter: true, logging: console.log });
+        // this.message.sync({ force: true, logging: console.log });
 
 
-        // this.conversation.sync({ alter: true, logging: console.log });
+        // this.conversation.sync({ force: true, logging: console.log });
 
-        // this.contact.sync({ force: true, logging: console.log });
+        // this.contact.sync({ alter: true, logging: console.log });
         
         
         console.log('¡Run database!')
@@ -131,6 +132,11 @@ export class _DataBase {
       .catch((err) => console.log('error', err))
   }
   private associations(): void {
+
+    userHasOneContact({
+      user: this.user,
+      contact: this.contact,
+    })
 
   }
 }

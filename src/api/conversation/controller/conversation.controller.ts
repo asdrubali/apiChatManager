@@ -18,17 +18,13 @@ export const createConversationController = async (
   try {
     const { userId } = req.user as IToken;
 
-    console.log(userId);
-    
-
     const dataBody = req.body as any;
 
     const result = await createConversationService({
       dataBody: {
        ...dataBody
       },
-      createBy: userId,
-      // createBy: 1,
+      createBy: userId
     });
 
 
@@ -48,6 +44,12 @@ export const getListConversationController = async (
   try {
 
     const { userId } = req.user as IToken;
+
+    console.log(userId);
+    
+
+    
+    
 
     const resp = await getListConversationServices(userId);
 

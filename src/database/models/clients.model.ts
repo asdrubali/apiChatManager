@@ -5,8 +5,6 @@ export interface clientAttributes {
   phone: string;
   name: string;
   last_name: string;
-  status: boolean;
-  avatar: string;
 
   created_at?: Date | null;
   created_by?: number | null;
@@ -40,22 +38,11 @@ export function clientFactory(sequelize: Sequelize): clientStatic {
         autoIncrement: true,
       },
 
-      phone: {
-        type: DataTypes.STRING,
+      user_id: {
+        type: DataTypes.BIGINT,
         allowNull: false,
       },
-      name: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
-      last_name: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
-      avatar: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
+
 
       status: {
         type: DataTypes.BOOLEAN,

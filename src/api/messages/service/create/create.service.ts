@@ -21,17 +21,14 @@ export const createMessageService = async (dataBody: any) => {
         }
       })
     }
-
-    const result = await sendMessage(contact.phone, dataBody.content )
-
     
-
     const new_message = await _DataBase.instance.message.create(
       {
         content: dataBody.content,
         date: new Date().toISOString(),
         sender_id: dataBody.sender ? dataBody.sender : contact!.id ,
-        contact_id: dataBody.sender ? dataBody.sender : contact!.id ,
+        contact_id: dataBody.sender ? dataBody.sender : contact!.id,
+        sender_user_id: dataBody.sender,
         conversation_id: 2,
         created_by: 1,
       },
@@ -39,6 +36,8 @@ export const createMessageService = async (dataBody: any) => {
         transaction: ts,
       }
     );
+    
+    const result = await sendMessage(contact.phone, dataBody.content )
 
     await ts.commit();
 
@@ -57,7 +56,7 @@ export const createMessage = async (dataBody: any) => {
 
     // console.log(dataBody);
 
-    innitflowCatResponse('holaaa')
+    // innitflowCatResponse('holaaa')
     
     let contact: any = {}
 

@@ -42,7 +42,7 @@ export default class Server {
       this.middlewares()
       this.routes()
       this.errors()
-      createBotWs()
+      // createBotWs()
       
     }
   

@@ -101,6 +101,9 @@ export const getListConversationServices = async (userId: number) => {
           ],
       },
   });
+
+  console.log({conversation});
+  
   
   const promises = conversation.map(async (cov) => {
       const messagePromise = _DataBase.instance.message.findAll({
@@ -119,11 +122,36 @@ export const getListConversationServices = async (userId: number) => {
           },
       });
   
-      const clientPromise = _DataBase.instance.contact.findAll({
+      const contactPromise = _DataBase.instance.contact.findAll({
           where: {
-              id: {
-                  [Op.in]: cov.contacts
-              }
+            id: cov.contact_id
+          },
+          include:{
+            model: _DataBase.instance.user,
+            attributes: {
+                exclude: [
+                    "is_deleted",
+                    "created_date",
+                    "updated_date",
+                    "created_by",
+                    "updated_by",
+                ],
+            },
+          },
+          attributes: {
+              exclude: [
+                  "is_deleted",
+                  "created_date",
+                  "updated_date",
+                  "created_by",
+                  "updated_by",
+              ],
+          },
+      });
+
+      const userPromise = _DataBase.instance.user.findAll({
+          where: {
+            id: cov.user_id
           },
           attributes: {
               exclude: [
@@ -136,12 +164,13 @@ export const getListConversationServices = async (userId: number) => {
           },
       });
   
-      const [message, client] = await Promise.all([messagePromise, clientPromise]);
+      const [message, contact, user] = await Promise.all([messagePromise, contactPromise, userPromise ]);
   
       const modifiedMessages = message.map(msg => ({
           id: msg.id,
           content: msg.content,
           date: msg.date,
+          sender_user_id: msg.sender_user_id,
           state: "sent", // Opcional, depende de tu lógica de negocio
           sender: {
               id: msg.sender_id,
@@ -154,23 +183,43 @@ export const getListConversationServices = async (userId: number) => {
           replyTo: null, // TODO: Puedes ajustar esto según tus necesidades
       }));
   
-      const modifiedContacts = client.map(contact => ({
+      const modifiedContacts = contact.map((contact: any) => ({
           id: contact.id,
           email: "TODO",
-          name: contact.name,
-          last_name: contact.last_name,
+          name: contact.user.name,
+          last_name: contact.user.last_name,
           lastSeen: new Date(), // TODO: Puedes obtener esto de algún otro lugar
-          avatar: contact.avatar, // TODO: Puedes obtener esto de algún otro lugar
+          avatar: contact.user.avatar, // TODO: Puedes obtener esto de algún otro lugar
+          phone: contact.phone, // TODO: Puedes obtener esto de algún otro lugar
+      }));
+
+      const modifiedUser = user.map(user => ({
+          id: user.id,
+          email: "TODO",
+          name: user.name,
+          last_name: user.last_name,
+          lastSeen: new Date(), // TODO: Puedes obtener esto de algún otro lugar
+          avatar: user.avatar, // TODO: Puedes obtener esto de algún otro lugar
+          phone: '', // TODO: Puedes obtener esto de algún otro lugar
       }));
   
+      const finalContact = modifiedContacts.concat(modifiedUser)
+
       const covPlain = cov.get({ plain: true });
   
       return {
           ...covPlain,
           unread: modifiedMessages.length,
-          contacts: modifiedContacts,
+          contacts: finalContact,
           messages: modifiedMessages
       };
+
+    // return {
+    //     conversation,
+    //     contact, 
+    //     message, 
+    //     user
+    // }
   });
   
   const finalData = await Promise.all(promises);
@@ -178,6 +227,8 @@ export const getListConversationServices = async (userId: number) => {
   return finalData;
 
   } catch (error) {
+    console.log(error);
+    
     throw error;
   }
 };

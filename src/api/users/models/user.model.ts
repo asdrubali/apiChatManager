@@ -12,6 +12,7 @@ export interface UserAttributes {
   username?: string;
   email: string;
   password: string;
+  avatar: string;
 
 
   salt: string;
@@ -90,6 +91,11 @@ export function UserFactory(sequelize: Sequelize): UserStatic {
         allowNull: false,
       },
       user_type: {
+        type: DataTypes.STRING,
+        allowNull: true,
+      },
+
+      avatar: {
         type: DataTypes.STRING,
         allowNull: true,
       },

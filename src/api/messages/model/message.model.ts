@@ -8,6 +8,7 @@ export interface MessageAttributes {
   sender_id: number;
   contact_id: number;
   conversation_id: number;
+  sender_user_id: number;
 
 //   date:Date;
   is_deleted?: boolean;
@@ -64,8 +65,10 @@ export function MessageFactory(sequelize: Sequelize): MessageStatic {
         type: DataTypes.STRING,
         allowNull: false,
       },
-
-
+      sender_user_id: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
       is_deleted: {
         type: DataTypes.BOOLEAN,
         defaultValue: false,
