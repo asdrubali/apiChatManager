@@ -21,7 +21,7 @@ export const createMessageService = async (dataBody: any) => {
           model: _DataBase.instance.user
         },
         where:{
-          id: dataBody.client_id
+          id: parseInt(dataBody.client_id as string)
         }
       })
 
