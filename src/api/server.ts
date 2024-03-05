@@ -20,6 +20,10 @@ import { contactRouter } from './contacts/routes/contact.routes'
 import { conversationRouter } from './conversation/router/conversation.routes'
 
 
+import http from 'http'
+import {Server as SocketIO} from 'socket.io'
+
+
 
 interface CustomReq extends Request {
   providerWs: any
@@ -32,17 +36,28 @@ export default class Server {
   private _app: Application
   private _port: number
   private _router: Router
+  private _http:any
+  public _socket
 
 
     constructor(port: any) {
       this._app = express()
       this._router = Router()
       this._port = port
+      this._http= http.createServer(this._app);
+      this._socket= new SocketIO(this._http,{
+        cors:{
+          origin:"*"//'http://127.0.0.1:5500',//process.env.PROY_FEURL,
+          // credentials: true
+        }
+      })
+  
 
       this.middlewares()
       this.routes()
       this.errors()
       createBotWs()
+      this.setupSocket()
       
     }
   
@@ -124,8 +139,19 @@ export default class Server {
         this._router.use('/message', messageRouter);
 
         this._router.use('/contactRouter', contactRouter);
+    }
 
-
+    private setupSocket() {
+      this._socket.on('connection', (socket: any) => {
+        console.log('Nuevo cliente conectado:', socket.id);
+  
+        // Maneja la creación de mensajes
+        socket.on('crearMensaje', (mensaje: any) => {
+          console.log('Mensaje recibido:', mensaje);
+  
+          this._socket.emit('nuevoMensaje', mensaje);
+        });
+      });
     }
   
     errors() {

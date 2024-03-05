@@ -6,7 +6,11 @@ import { _DataBase } from './database';
 
 dotenv.config()
 
-const server = Server.init(Number(env.PORT))
+export const server = Server.init(Number(env.PORT))
+
+export const _socket = server._socket
+
+
 server.start(() => {
   console.log('Server on fire ' + env.PORT)
   _DataBase.instance
