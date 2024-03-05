@@ -214,12 +214,6 @@ export const getListConversationServices = async (userId: number) => {
           messages: modifiedMessages
       };
 
-    // return {
-    //     conversation,
-    //     contact, 
-    //     message, 
-    //     user
-    // }
   });
   
   const finalData = await Promise.all(promises);

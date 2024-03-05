@@ -14,21 +14,30 @@ export const createMessageService = async (dataBody: any) => {
     
     let contact: any = {}
 
+    console.log(dataBody);
+    
+
     if(!!dataBody.phone){
       contact = await _DataBase.instance.contact.findOne({
+        include: {
+          model: _DataBase.instance.user
+        },
         where:{
-          phone: dataBody.phone
+          id: dataBody.client_id
         }
       })
     }
+
+    console.log(contact);
+    
     
     const new_message = await _DataBase.instance.message.create(
       {
         content: dataBody.content,
         date: new Date().toISOString(),
-        sender_id: dataBody.sender ? dataBody.sender : contact!.id ,
-        contact_id: dataBody.sender ? dataBody.sender : contact!.id,
-        sender_user_id: dataBody.sender,
+        sender_id: 1,
+        contact_id: 1,
+        sender_user_id: dataBody.sender_user_id,
         conversation_id: 2,
         created_by: 1,
       },
