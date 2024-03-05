@@ -12,12 +12,11 @@ export const createMessageService = async (dataBody: any) => {
 
     // innitflowCatResponse('holaaa')
     
-    let contact: any = {}
+ 
 
-    console.log(dataBody);
     
 
-      contact = await _DataBase.instance.contact.findOne({
+      const contact = await _DataBase.instance.contact.findOne({
         include: {
           model: _DataBase.instance.user
         },
@@ -26,7 +25,6 @@ export const createMessageService = async (dataBody: any) => {
         }
       })
 
-    console.log(contact);
     
     
     const new_message = await _DataBase.instance.message.create(
