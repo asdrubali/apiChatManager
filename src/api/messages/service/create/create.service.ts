@@ -47,9 +47,7 @@ export const createMessageService = async (dataBody: any) => {
       }
     );
 
-    _socket.emit('newMessage', () =>{
-      console.log('message')
-    });
+    _socket.emit('newMessage', new_message);
     
     const result = await sendMessage(contact.phone, dataBody.content )
 
@@ -97,6 +95,9 @@ export const createMessage = async (dataBody: any) => {
         transaction: ts,
       }
     );
+
+    _socket.emit('newMessage', new_message);
+    
 
     await ts.commit();
 
