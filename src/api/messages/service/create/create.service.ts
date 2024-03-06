@@ -69,16 +69,19 @@ export const createMessage = async (dataBody: any) => {
     // console.log(dataBody);
 
     // innitflowCatResponse('holaaa')
-    
-    let contact: any = {}
 
-    if(!!dataBody.phone){
-      contact = await _DataBase.instance.contact.findOne({
+    const contact = await _DataBase.instance.contact.findOne({
         where:{
           phone: dataBody.phone
         }
       })
-    }
+    
+    const conversation = await _DataBase.instance.conversation.findOne({
+        where:{
+          contact_id: contact.id
+        }
+      })
+    
 
     
 
@@ -86,9 +89,10 @@ export const createMessage = async (dataBody: any) => {
       {
         content: dataBody.content,
         date: new Date().toISOString(),
-        sender_id: dataBody.sender ? dataBody.sender : contact!.id ,
-        contact_id: dataBody.sender ? dataBody.sender : contact!.id ,
-        conversation_id: 2,
+        sender_id: 1,
+        contact_id: 1,
+        sender_user_id: contact.user_id,
+        conversation_id: conversation.id,
         created_by: 1,
       },
       {
