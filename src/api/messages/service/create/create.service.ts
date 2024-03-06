@@ -1,3 +1,4 @@
+
 import { _socket } from "src";
 import { innitflowCatResponse } from "src/api/whatsapp/flow/chatFlow";
 import { sendMessage } from "src/api/whatsapp/templates/rentCars/statickCarsRent";
@@ -46,7 +47,9 @@ export const createMessageService = async (dataBody: any) => {
       }
     );
 
-    _socket.emit('crearMensaje', dataBody.content);
+    _socket.emit('newMessage', () =>{
+      console.log('message')
+    });
     
     const result = await sendMessage(contact.phone, dataBody.content )
 

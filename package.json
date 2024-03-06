@@ -16,6 +16,7 @@
         "@bot-whatsapp/database": "latest",
         "@bot-whatsapp/portal": "latest",
         "@bot-whatsapp/provider": "latest",
+        "@types/socket.io": "^3.0.2",
         "@whiskeysockets/baileys": "^6.5.0",
         "aws-sdk": "^2.1544.0",
         "axios": "^1.6.7",
