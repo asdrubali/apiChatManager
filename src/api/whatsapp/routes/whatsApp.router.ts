@@ -8,6 +8,7 @@ const routerWhatsApp = Router()
 
 routerWhatsApp.get('/callback', whatsAppBotInitController_3)
 routerWhatsApp.get("/qr", whatsAppBotGetQr)
+routerWhatsApp.get("/rent-car-ws", whatsAppBotGetQr)
 
 
 export default routerWhatsApp

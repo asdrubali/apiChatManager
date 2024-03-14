@@ -1,5 +1,5 @@
 
-import { Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 import { join } from "path";
 import { createReadStream } from "fs";
 import BotWhatsapp from '@bot-whatsapp/bot';
@@ -7,6 +7,9 @@ import database from "../database";
 
 import flow from "../flow";
 import { adProvider } from "../provider";
+import { errorControl } from "src/api/functions/errorControl";
+import { successResponse } from "src/api/functions/apiResponses";
+import { getByIdCompanyServices } from "../services/find/find.service";
 
 
 
@@ -61,3 +64,21 @@ export const whatsAppBotInitController_3 = (req: Request, res: Response) => {
 
   res.send(`Todo Ok`)
 }
+
+
+export const rentCarTemplate = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+
+    const resp = await getByIdCompanyServices()
+
+
+    res.status(200).json(successResponse(resp, 200, 'plantillas obtenidas'));
+  } catch (err: any) {
+    errorControl(err, next);
+  }
+};
+  

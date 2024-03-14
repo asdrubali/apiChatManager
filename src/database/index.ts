@@ -2,7 +2,7 @@ import { Sequelize } from 'sequelize'
 import { configDb } from './config/config';
 import { clientFactory, clientStatic } from 'src/database/models/clients.model';
 import { bookingFactory, bookingStatic } from 'src/api/whatsapp/database/models/booking.model';
-import { templateFactory, templateStatic } from 'src/api/whatsapp/database/models/template.model';
+import { templateFactory, templateStatic } from 'src/api/templates/model/template.model';
 import { RentCarStatic, rentCarFactory } from 'src/api/whatsapp/templates/rentCars/models/rentCar.model';
 import { CarsStatic, carFactory } from 'src/api/whatsapp/templates/rentCars/models/car.model';
 import { SucursalFactory, SucursalStatic } from 'src/api/whatsapp/templates/rentCars/models/sucursal.model';
@@ -101,7 +101,7 @@ export class _DataBase {
         // this.booking.sync({ alter: true, logging: console.log });
 
         
-        // this.template.sync({ alter: true, logging: console.log });
+        this.template.sync({ force: true, logging: console.log });
         
         // this.RentCar.sync({ alter: true, logging: console.log });
         

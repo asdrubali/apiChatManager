@@ -17,15 +17,12 @@ export const partnerRouter: Router = Router();
 
 partnerRouter.post(
   "/create",
-  // createCompanyValidator,
-  // verifyAccess,
   allValidator,
   createPartnerController
 );
 
 partnerRouter.get(
   "/list",
-  // verifyAccess,
   allValidator,
   getListPartnerController
 );
@@ -33,25 +30,8 @@ partnerRouter.get(
 partnerRouter.get(
   "/find/:id",
   IdValidator,
-  // verifyAccess,
   allValidator,
   findByIdPartnerController
 );
 
-// partnerRouter.put(
-//   "/update/:id",
-//   updateCompanyValidator,
-//   verifyAccess,
-//   allValidator,
-//   updateByIdCompanyController
-// );
 
-
-
-// partnerRouter.delete(
-//   "/delete/:id",
-//   IdValidator,
-//   verifyAccess,
-//   allValidator,
-//   deleteByIdCompanyController
-// );

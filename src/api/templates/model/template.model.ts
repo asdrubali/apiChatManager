@@ -3,11 +3,14 @@ import { BuildOptions, DataTypes, Model, Sequelize } from "sequelize";
 export interface templateAttributes {
   id: number;
 
-  name: string;
+  title: string;
+  subtitle: string;
   tech: string;
   description: string;
+  image: string;
+  review: string[];
+  
   is_active: boolean;
-
   created_at?: Date | null;
   created_by?: number | null;
   updated_at?: Date | null;
@@ -43,7 +46,11 @@ export function templateFactory(sequelize: Sequelize): templateStatic {
       },
 
 
-      name: {
+      title: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      subtitle: {
         type: DataTypes.STRING,
         allowNull: false,
       },
@@ -55,6 +62,15 @@ export function templateFactory(sequelize: Sequelize): templateStatic {
         type: DataTypes.STRING,
         allowNull: false,
       },
+      image: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      review: {
+        type: DataTypes.ARRAY(DataTypes.STRING),
+        allowNull: false,
+      },
+
       is_active: {
         type: DataTypes.BOOLEAN,
         allowNull: false,
