@@ -24,6 +24,7 @@
   import {Server as SocketIO} from 'socket.io'
   import { Http2Server } from 'http2'
   import configureSocket from 'src/socket/socket'
+import { templatesRouter } from './templates/routes/templates.routes'
 
 
 
@@ -134,7 +135,7 @@
 
           // this._router.use('/company', routerCompany);
 
-          // this._router.use('/agent', routerAgent);
+          this._router.use('/templates', templatesRouter);
 
           this._router.use('/message', messageRouter);
 

@@ -6,11 +6,11 @@ import { getListTemplatesController } from "../controllers/templates.controller"
 
 
 
-export const partnerRouter: Router = Router();
+export const templatesRouter: Router = Router();
 
 
 
-partnerRouter.get(
+templatesRouter.get(
   "/list",
   getListTemplatesController
 );

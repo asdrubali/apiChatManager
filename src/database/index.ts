@@ -101,7 +101,7 @@ export class _DataBase {
         // this.booking.sync({ alter: true, logging: console.log });
 
         
-        this.template.sync({ force: true, logging: console.log });
+        // this.template.sync({ force: true, logging: console.log });
         
         // this.RentCar.sync({ alter: true, logging: console.log });
         
