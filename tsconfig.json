@@ -12,11 +12,11 @@
     "sourceMap": false,
     "outDir": "./dist",
     "baseUrl": "./",
-    "rootDir": "./src",
+    "rootDir": "./",
     "incremental": true,
     "skipLibCheck": true,
     "typeRoots": ["src/api/whatsapp/@types/*", "./node_modules/@types"]
   },
-  "include": ["src"],
+  "include": ["src", "index.ts"],
   "exclude": ["node_modules"]
 }

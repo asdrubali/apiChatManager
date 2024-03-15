@@ -1,5 +1,6 @@
 
-import { _socket } from "src";
+
+import { _socket } from "index";
 import { innitflowCatResponse } from "src/api/whatsapp/flow/chatFlow";
 import { sendMessage } from "src/api/whatsapp/templates/rentCars/statickCarsRent";
 import { _DataBase } from "src/database";

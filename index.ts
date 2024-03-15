@@ -1,8 +1,8 @@
 
 import * as dotenv from 'dotenv'
 import { env } from 'process'
-import Server from './api/server';
-import { _DataBase } from './database';
+import Server from './src/api/server';
+import { _DataBase } from './src/database';
 import { Server as SocketIO } from 'socket.io';
 import http from 'http';
 
