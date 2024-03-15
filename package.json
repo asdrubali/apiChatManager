@@ -3,7 +3,7 @@
     "version": "1.0.0",
     "description": "",
     "main": "app.js",
-    "type": "module",
+    "type": "commonjs",
     "scripts": {
         "dev": "node ./node_modules/tsx/dist/cli.cjs ./index.ts",
         "build": "tsc --build",
@@ -72,3 +72,5 @@
         "typescript": "^5.3.3"
     }
 }
+
+
