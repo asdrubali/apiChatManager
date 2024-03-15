@@ -96,35 +96,35 @@ export class _DataBase {
       .authenticate()
       .then(() => {
 
-        this.client.sync({ alter: true, logging: console.log });
+        // this.client.sync({ alter: true, logging: console.log });
 
-        this.booking.sync({ alter: true, logging: console.log });
+        // this.booking.sync({ alter: true, logging: console.log });
 
         
-        this.template.sync({ force: true, logging: console.log });
+        // this.template.sync({ force: true, logging: console.log });
         
-        this.RentCar.sync({ alter: true, logging: console.log });
+        // this.RentCar.sync({ alter: true, logging: console.log });
         
-        this.Cars.sync({ alter: true, logging: console.log });
+        // this.Cars.sync({ alter: true, logging: console.log });
         
-        this.Sucursal.sync({ alter: true, logging: console.log });
+        // this.Sucursal.sync({ alter: true, logging: console.log });
 
-        this.TypeCar.sync({ alter: true, logging: console.log });
+        // this.TypeCar.sync({ alter: true, logging: console.log });
         
-        this.FrequenTQuestions.sync({ alter: true, logging: console.log });
+        // this.FrequenTQuestions.sync({ alter: true, logging: console.log });
 
-        this.token.sync({ alter: true, logging: console.log })
+        // this.token.sync({ alter: true, logging: console.log })
 
-        this.user.sync({ alter: true, logging: console.log });
+        // this.user.sync({ alter: true, logging: console.log });
 
-        this.chatBot.sync({ alter: true, logging: console.log });
+        // this.chatBot.sync({ alter: true, logging: console.log });
 
-        this.message.sync({ alter: true, logging: console.log });
+        // this.message.sync({ alter: true, logging: console.log });
 
 
-        this.conversation.sync({ alter: true, logging: console.log });
+        // this.conversation.sync({ alter: true, logging: console.log });
 
-        this.contact.sync({ alter: true, logging: console.log });
+        // this.contact.sync({ alter: true, logging: console.log });
         
         
         console.log('¡Run database!')
