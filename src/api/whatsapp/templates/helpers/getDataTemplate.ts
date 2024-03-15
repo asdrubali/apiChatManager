@@ -4,7 +4,10 @@ import { _DataBase } from "src/database"
 export const getListCars = async () => {
     try {
         
-        return await _DataBase.instance.Cars.findAll()
+        const data = await _DataBase.instance.Cars.findAll()
+
+        return data
+
 
     } catch (error) {
         console.error(error)
@@ -13,7 +16,9 @@ export const getListCars = async () => {
 
 export const getListTypesCars = async () => {
     try {
-        return await _DataBase.instance.TypeCar.findAll();
+        const data = await _DataBase.instance.TypeCar.findAll();
+
+        return data
         
     } catch (error) {
         console.error(error)
@@ -22,7 +27,9 @@ export const getListTypesCars = async () => {
 
 export const getListSucursals = async () => {
     try {
-        return await _DataBase.instance.Sucursal.findAll();
+        const data = await _DataBase.instance.Sucursal.findAll();
+
+        return data
         
     } catch (error) {
         console.error(error)

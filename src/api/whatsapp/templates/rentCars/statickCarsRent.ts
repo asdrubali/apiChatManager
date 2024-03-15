@@ -41,9 +41,9 @@ const dataClient = {} as any;
 //     '3': 'Medellín'
 // };
 
-const dataCars: CarsAttributes[] = await getListCars();
-const dataTypeCars: TypeCarAttributes[] = await getListTypesCars();
-const dataSucursales: SucursalAttributes[] = await getListSucursals();
+// const dataCars: CarsAttributes[] =  getListCars();
+const dataTypeCars: any =  getListTypesCars();
+const dataSucursales: any =  getListSucursals();
 
 const opcionesSucursales = {};
 const opcionesVehiculo = {};
