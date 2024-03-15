@@ -1,12 +1,6 @@
 import { Router } from "express";
 
 
-import {
-  IdValidator,
-  changePasswordValidator,
-  createUserDtoValidator,
-  updateUserDtoValidator,
-} from "../validators/user.validator";
 
 import { paginationValidator } from "../../../validators/pagination.validator";
 import { verifyAccess } from "src/middlewares/user-access";

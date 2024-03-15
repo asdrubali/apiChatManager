@@ -14,7 +14,7 @@ export const createConversationService = async ({
         id: 0,
         user_id: createBy,
         contacts: dataBody.contacts,
-        client_id: dataBody.client_id,
+        contact_id: dataBody.client_id,
         type: "couple",
         created_by: createBy,
       },

@@ -7,10 +7,6 @@
   import { adProvider } from './whatsapp/provider'
   import { createBotWs } from './whatsapp/templates/rentCars/statickCarsRent'
   import passport from "passport";
-  import { partnerRouter } from './partner/routes/partner.routes'
-  import { partnerRouter as routerCompany } from './partner/routes/partner.routes'
-  import { partnerRouter as routerAgent } from './partner/routes/partner.routes'
-  import { partnerRouter as routerClient } from './partner/routes/partner.routes'
   import passportMiddleware from 'src/middlewares/passport'
   import { handleAuthError } from 'src/middlewares/passport-auth'
   import { router as userRouter } from './users/routes/user.routes'

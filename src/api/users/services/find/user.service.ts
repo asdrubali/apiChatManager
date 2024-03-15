@@ -5,11 +5,6 @@ import {
   WhereOptions,
 } from "sequelize";
 import { UserAttributes } from "../../models/user.model";
-import { IDbUserAccount, IUserAccount } from "../../interfaces/user-account";
-import {
-  IDBUserInformation,
-  IUserInformation,
-} from "../../interfaces/user-query-list";
 import { _DataBase } from "src/database";
 import { Op } from "sequelize";
 
@@ -56,7 +51,7 @@ const findOneUser = async ({
   return user.get({ plain: true });
 };
 
-const getAccountById = async (userId: number): Promise<IUserAccount> => {
+const getAccountById = async (userId: number): Promise<any> => {
   try {
     const query = `
         select u.id, u.username, u.email, u.name,u.paternal_lastname, maternal_lastname,
@@ -74,10 +69,10 @@ const getAccountById = async (userId: number): Promise<IUserAccount> => {
     const accountResp = (await _DataBase.instance.sequelize.query(query, {
       type: QueryTypes.SELECT,
       replacements: [userId],
-    })) as IDbUserAccount[];
+    })) as any[];
 
     const accountDB = accountResp[0];
-    const account: IUserAccount = {
+    const account: any = {
       ...accountDB,
       roles: JSON.parse(accountDB.roles),
     };
@@ -109,7 +104,7 @@ const findUserInformationById = async (userId: number) => {
     const resp = (await _DataBase.instance.sequelize.query(query, {
       type: QueryTypes.SELECT,
       replacements: [userId],
-    })) as IDBUserInformation[];
+    })) as any[];
 
     if (resp.length == 0) {
       return null;
@@ -121,7 +116,7 @@ const findUserInformationById = async (userId: number) => {
 
     const fid_rol = id_rol[0].id;
 
-    const userInformation: IUserInformation = {
+    const userInformation: any = {
       ...dbUser,
       status: !!dbUser.status,
       roles: fid_rol === null ? JSON.parse("[]") : JSON.parse(dbUser.roles),

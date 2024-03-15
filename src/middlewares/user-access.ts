@@ -10,7 +10,7 @@ function routeToRegExp(route: string) {
 }
 
 export function verifyAccess(req: Request, res: Response, next: NextFunction) {
-  const user = req?.user as IToken;
+  const user = req?.user as any;
 
   const originalRoute = req.originalUrl;
   let currentRoute = originalRoute.split("?")[0].replace("/api", "");

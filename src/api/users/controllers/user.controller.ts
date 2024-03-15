@@ -16,15 +16,15 @@ import { createUserAndSendMailService } from "../services/create/user.service";
 import sequelize from "sequelize";
 import createError from "http-errors";
 
-import { CreateUserDto } from "../dtos";
+
 import { generate } from "generate-password";
 import { disableOrEnableUserById } from "../services";
 
-import { UpdateUserDto } from "../dtos/update-user.dto";
+
 
 import { UserAttributes } from "../models/user.model";
 
-import { IUserQueryParams } from "../interfaces/IUserQueryParams";
+
 import { _DataBase } from "src/database";
 import { IToken } from "src/api/interfaces/IToken.interface";
 import { errorResponse, successResponse } from "src/api/functions/apiResponses";

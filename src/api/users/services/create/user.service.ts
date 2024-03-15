@@ -4,7 +4,7 @@ import {
   UserCreationAttributes,
   UserModel,
 } from "../../models/user.model";
-import { CreateUserDto } from "../../dtos";
+
 import { USER_DEFAULT_VALUES } from "../../constants/defaultValues";
 // import { template_create_admin } from "../../../../templates/templates";
 import { NullishPropertiesOf } from "sequelize/types/utils";

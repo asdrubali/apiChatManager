@@ -4,7 +4,7 @@ import { Transaction, WhereOptions } from "sequelize";
 
 
 import { UserPartialAttributes, UserAttributes } from "../../models/user.model";
-import { UpdateUserDto } from "../../dtos/update-user.dto";
+
 
 import { _DataBase } from "src/database";
 import { encrypt } from "src/api/security/criptoService";
