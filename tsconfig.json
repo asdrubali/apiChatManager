@@ -17,6 +17,9 @@
     "skipLibCheck": true,
     "typeRoots": ["src/api/whatsapp/@types/*", "./node_modules/@types"]
   },
-  "include": ["src", "index.ts"],
+  "include": [
+    "src/**/*.ts", // Carpeta src y sus subcarpetas con archivos .ts
+    "index.ts" // Archivo index.ts
+  ],
   "exclude": ["node_modules"]
 }
